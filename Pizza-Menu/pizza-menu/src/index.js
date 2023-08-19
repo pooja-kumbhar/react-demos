@@ -59,15 +59,20 @@ function App()
 }
 function Menu(){return (<div className="menu">
     <h2>Our Menu</h2>
+    <>
+    <p> Welcome😊Authentic Italian cuisine. Cantain variety of delicious😋 pizzas🍕 of your choice</p>
     <ul className="pizzas">
        { pizzaData.map(data=> <Pizza 
-    name={data.name} photo={data.photoName} ingridients={data.ingredients} price={data.price}/>)}
+    name={data.name} photo={data.photoName} ingridients={data.ingredients} price={data.soldOut ?"Sold-Out":data.price}/>)}
    
-        </ul>      
+        </ul> </>
+         
 </div>)}
 
 function Pizza(props)
 {
+    if (props.soldOut) return null;
+    
     return (<div className="pizza">
         <img src={props.photo} alt={props.name}/>
         <li>
@@ -87,13 +92,24 @@ function Header(){
 
 
 function Footer(){ 
-    const hour = new Date().getHours;
+    const hour = new Date().getHours();
+    const isOpen= hour >= 12  && hour <=22;
 
-    (hour > 9  && hour < 22)? alert("We are Open :)") : alert(" Sorry:( We are Closed")
-
+    console.log(hour, isOpen);
     return <footer className="footer">
-    {new Date().toLocaleTimeString()}. We are currently Open..
+        {isOpen ?(
+        <Order/>):
+    (<div> <p> We are Open until 22:00. Come visit us or order online.</p> 
+     <button className="btn">Order</button>
+     </div> )}
 </footer>}
+
+function Order(){
+    return (<div className="order">
+    <p> We are Open until 22:00. Come visit us or order online.</p> 
+    <button className="btn">Order</button>
+    </div>)
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App/>);
