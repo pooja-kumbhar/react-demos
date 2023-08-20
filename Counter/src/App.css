@@ -1,0 +1,16 @@
+*{
+  box-sizing: border-box;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  margin-left: 500px;
+  margin-bottom: 10px;
+}
+
+.dateString{
+  display: flex;
+  margin-left: 700px;
+}
