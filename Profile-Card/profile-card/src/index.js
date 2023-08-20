@@ -1,6 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 
+const data=[{skill:"HTML",
+level:"advance",
+color:"red"},
+{skill:"CSS",
+level:"intermediate",
+color:"blue"},
+{skill:"JavaScript",
+level:"advance",
+color:"green"}];
 function App() {
   return (
     <div className="App" style={{boxSizing:"border-box" , width:500 , height:500 }}>
@@ -33,8 +42,9 @@ function Introduction()
 
 function Skills()
 {
-  return(
-  <div><span style={{backgroundColor:"yellow"}}> React ✌️</span> <span style={{backgroundColor:"red"}}>HTML🤞</span> <span style = {{backgroundColor:"blue"}}>CSS 🫴</span> <span style= {{backgroundColor:"green"}}>Java Scripr 🫴</span></div> )
+  
+  return( data.map(data=> <div className="Skills" style={{backgroundColor:data.color}}><span > {data.skill}</span> <span > {data.level}</span></div> ))
+  
   
 }
 
