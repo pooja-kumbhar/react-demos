@@ -5,12 +5,16 @@ const messages=["Learn React🧑‍🎓","Apply for Jobs 👩‍💻", "Invest y
 export default function App(){
   
   const [step, setStep]=React.useState(1);
+  const [open, isOpen]=React.useState(true);
 
   function handlePrivious(){ step>1 && setStep(step-1)}
 
-  function handleNext(){ step <3&& setStep(step+1)}
+  function handleNext(){ step <3&& setStep((s)=>s+1)}
 
-  return <div className="steps">
+  return <div>
+    <button className="close" onClick={()=>isOpen(!open)}>&times;</button>
+    {open &&(
+   <div className="steps">
     <div className="numbers">
       <div className={step>=1?"active":""}>1</div>
       <div className={step>=2?"active":""}>2</div>
@@ -23,5 +27,7 @@ export default function App(){
       <button style={{backgroundColor:"#7950f2", color:"fff"}} onClick={handlePrivious}>Privious</button>
       <button style={{backgroundColor:"#7950f2", color:"fff"}} onClick={handleNext}>Next</button>
     </div>
+  </div>
+    )}
   </div>
 }
