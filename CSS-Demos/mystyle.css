@@ -1,0 +1,14 @@
+body{
+    background-color: rgb(204, 193, 213);
+}
+
+#header{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: rgb(101, 63, 136);
+    font-weight: bold;
+}
+
+.para{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+   font-style: italic;
+}

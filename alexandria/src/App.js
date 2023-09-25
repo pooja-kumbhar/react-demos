@@ -9,12 +9,15 @@ const [diceNumber, setDiceNumber] = React.useState(1);
 const [playerOneScore, setplayerOneScore] = React.useState(0);
 const [playerTwoScore, setplayerTwoScore] = React.useState(0);
 const [player, setActivePlayer] = React.useState(1);
+const [name,setCurrentPlayerName]=React.useState("Player 1");
+const [gameId,setgameId]= React.useState("");
 
 async function startGame()
 {
   const res= await fetch("http://assessment.tabit-gmbh.de/start");
   const gameId= await res.text();
   console.log(gameId);
+  setgameId(gameId);
   setStart(true);
 
   const playersResponse = await fetch('http://assessment.tabit-gmbh.de/players', {
@@ -27,6 +30,22 @@ async function startGame()
   })
   const players= await playersResponse.json();
   console.log(players);
+
+}
+
+async function fetchNextPlayer()
+{
+  const winnerResponse = await fetch('http://assessment.tabit-gmbh.de/next', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      "id": gameId,
+      "player": name,
+      "numberOfDice":diceNumber,
+    }),
+  })
+  const winner= await winnerResponse.json();
+  return  winner;
 }
 
   return (  
@@ -62,7 +81,10 @@ async function startGame()
     const dice= Math.trunc(Math.random()*6)+1;
     console.log(dice);
     setDiceNumber(dice);
-
+    const data= fetchNextPlayer();
+    console.log(data.nextPlayer[name]);
+    setCurrentPlayerName(data.nextPlayer[name]);
+    
       player ===1 ? (playerOneScore>=30 && alert("Player one is winner🥇")):setplayerOneScore(playerOneScore+dice);
       player ===2 ? ( playerTwoScore>=30 && alert("Player two is winner🥇")):setplayerTwoScore(playerTwoScore+dice);
   
