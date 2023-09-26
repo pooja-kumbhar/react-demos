@@ -2,8 +2,13 @@ import './App.css';
 import React from "react";
 
 function App() {
- const [count, setCounter] = React.useState(1)
+ const [count, setCounter] = React.useState(0)
  const [step, setStep] = React.useState(1)
+
+ function handleReset(){
+  setCounter(0);
+  setStep(1);
+ }
 
  const date= new Date("august 20 2023");
  date.setDate(date.getDate() + count)
@@ -22,7 +27,14 @@ function App() {
     <p>Count:{count}</p>
     <button onClick={()=>setCounter((c)=>c+step)}>+</button>
     </div>
-    <p className="dateString">{date.toDateString()}</p>
+    <span className="dateString">{date.toDateString()}</span>
+   
+      {(count!==0 || step!==1) ?
+       <div className="buttons">
+      <button onClick={handleReset}>
+        Resset
+      </button>
+    </div>: null}
   </>)
 }
 
