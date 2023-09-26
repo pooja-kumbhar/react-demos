@@ -11,9 +11,10 @@ function App() {
   return (
   <>
  <div className="buttons">
-    <button onClick={()=>setStep((c)=>c-1)}>-</button>
-    <p>Step:{step}</p>
-    <button onClick={()=>setStep((c)=>c+1)}>+</button>
+  <input type="range" min="0" max="10"
+  value={step} onChange={(e)=>setStep(Number(e.target.value))}/>
+    <span>Step:{step}</span>
+    
     </div>
 
     <div className="buttons">
